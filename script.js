@@ -118,3 +118,25 @@ function type(){
 
 window.addEventListener("load", type);
 
+
+(function(){
+  const baseW = 1350; // must match --board-base-w
+  const boardImg = document.getElementById('boardImg');
+  const notesGrid = document.getElementById('notesGrid');
+
+  function fitOverlay(){
+    // displayed image width / natural plan width
+    const displayedW = boardImg.getBoundingClientRect().width;
+    const scale = displayedW / baseW;
+    document.documentElement.style.setProperty('--board-scale', scale);
+  }
+
+  // re-fit on load and when resizing
+  window.addEventListener('resize', fitOverlay);
+  if (boardImg.complete) {
+    fitOverlay();
+  } else {
+    boardImg.addEventListener('load', fitOverlay);
+  }
+})();
+
