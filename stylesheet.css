@@ -341,3 +341,74 @@ body{
 }
 
 .wall:not(.expanded) .murder-board { display: none !important; }
+
+/* Tablets (landscape & portrait) */
+@media (max-width: 1024px) {
+  .wall.expanded {
+    width: 90vw; /* Use a percentage instead of fixed 1350px */
+  }
+
+  .murder-board {
+    max-width: 70vw;
+    margin: 80px auto 0;
+  }
+
+  .note {
+    width: 120px;
+    height: auto;
+    font-size: 12px;
+  }
+
+  .header {
+    top: 180px;
+    font-size: 18px;
+  }
+}
+
+/* Phones */
+@media (max-width: 768px) {
+  .wall.expanded {
+    width: 100vw;
+  }
+
+  .notes-grid {
+    padding: 20px;
+  }
+
+  .note {
+    position: relative;
+    width: 90%;
+    height: auto;
+    margin: 20px auto;
+    transform: none !important; /* Remove rotation so it’s easier to read */
+  }
+
+  .murder-board {
+    max-width: 90%;
+    margin: 40px auto;
+  }
+
+  .header {
+    font-size: 16px;
+    top: 140px;
+  }
+}
+
+/* Small phones (iPhone SE, etc.) */
+@media (max-width: 480px) {
+  .note {
+    font-size: 11px;
+    padding: 10px;
+  }
+
+  .resume-embed .btn {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  .other img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
