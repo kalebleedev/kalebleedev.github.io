@@ -342,96 +342,182 @@ body{
 
 .wall:not(.expanded) .murder-board { display: none !important; }
 
-/* --- Mobile / small tablets --- */
-@media (max-width: 768px) {
-  /* Hide the wall off-screen until opened */
-  .wall {
-    width: 100vw;                 /* it will fill screen when opened */
-    transform: translateX(calc(100% - 36px)); /* show only the handle */
-    transition: transform 0.4s ease, width 0.4s ease;
-    right: 0;
-    left: auto;
-  }
+/* =========================
+   Responsive Adjustments
+   ========================= */
+
+/* Tablet (≤1024px) */
+@media (max-width: 1024px) {
   .wall.expanded {
-    width: 100vw;
-    transform: translateX(0);
+    width: 100%;
   }
 
-  /* Make the handle sit on the right edge */
-  .handle {
-    position: absolute;
-    right: 0;
-    left: auto;
-    width: 36px;
-    height: 64px;
-    transform: none;
+  .notes-grid {
+    padding: 20px;
   }
 
-  /* Board only shows when expanded (you already have a rule, this just sizes it) */
+  .note {
+    width: 120px;
+    height: 120px;
+    font-size: 0.9em;
+  }
+
+  .note.photo img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
   .murder-board {
-    width: 96vw;
-    max-width: none;
-    margin: 24px auto 0;
+    width: 95%;
+    max-width: 720px;
+    margin-top: 130px;
   }
 
-  /* Notes area: use a wrapping layout instead of absolute positions */
-  .wall.expanded .notes-grid {
-    position: relative;      /* stop absolute inset:0 from forcing overflow */
-    opacity: 1;
-    pointer-events: auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-    align-content: flex-start;
-    padding: 16px;
-    overflow: auto;
-  }
-
-  /* Make each note a normal block in the flex layout */
-  .wall.expanded .note {
-    position: static;
-    width: min(44vw, 180px);
-    height: auto;            /* let height grow for content */
-    transform: rotate(var(--twist, -2deg)); /* keep a tiny tilt */
-  }
-
-  /* Header shouldn’t be absolutely positioned on mobile */
   .header {
-    position: static;
-    transform: none;
-    margin: 8px 0 4px;
-    text-align: center;
-    font-size: 18px;
+    font-size: 1.5rem;
+    top: 180px;
   }
 
-  /* Zoomed note: give more room on phones */
-  .note.zoomed {
-    width: 92vw;
-    max-height: 80vh;
-  }
-
-  /* Don’t show any preview text until tapped */
-  .note:not(.zoomed) .note-body {
-    opacity: 0;
-    pointer-events: none;
+  .intro-text {
+    max-width: 600px;
+    line-height: 1.4;
   }
 }
 
-/* --- Larger tablets (portrait/landscape) --- */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .wall { width: 90vw; transform: translateX(calc(100% - 40px)); }
-  .wall.expanded { width: 90vw; transform: translateX(0); }
-
-  .murder-board { width: 75vw; max-width: 900px; margin: 40px auto 0; }
-
-  .wall.expanded .notes-grid {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
-    padding: 24px 32px;
-    overflow: auto;
+/* Mobile (≤768px) */
+@media (max-width: 768px) {
+  body {
+    background-size: cover;
+    background-position: center;
   }
-  .wall.expanded .note { position: static; margin: 0 auto; width: 160px; height: auto; }
+
+  .wall {
+    width: 80px;
+  }
+
+  .wall.expanded {
+    width: 100%;
+  }
+
+  .handle {
+    width: 28px;
+    height: 56px;
+    font-size: 18px;
+    /* keep the handle reachable on narrow screens */
+    transform: translateX(120%);
+  }
+
+  .header {
+    font-size: 1.2rem;
+    top: 140px;
+    padding: 0 10px;
+    text-align: center;
+  }
+
+  /* Switch notes area to a flowing layout so items don't get pushed off-screen */
+  .notes-grid {
+    position: static;               /* let it flow within the expanded wall */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px 14px;
+    overflow: visible;
+  }
+
+  /* Remove absolute positioning for notes & photo on mobile */
+  .note,
+  .note.photo {
+    position: static !important;
+    width: 42vw;                    /* responsive width */
+    max-width: 200px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    transform: none;                /* remove playful rotation for better readability */
+    filter: none;
+  }
+
+  .note:nth-child(2n),
+  .note:nth-child(3n) {
+    --twist: 0deg;                  /* neutralize rotation helpers on mobile */
+  }
+
+  .note-body {
+    font-size: 0.9em;
+  }
+
+  .note.photo img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .note.zoomed {
+    width: 90%;
+    max-height: 80vh;
+  }
+
+  .note.photo.zoomed {
+    max-width: 95vw;
+    max-height: 70vh;
+  }
+
+  .murder-board {
+    width: 96%;
+    max-width: none;
+    margin: 120px auto 0 auto;
+  }
+
+  .resume-embed .btn {
+    font-size: 16px;
+    padding: 6px 10px;
+  }
+
+  .other {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Make the typewriter text feel more vertical */
+  .intro-text {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px 10px;
+    text-align: center;
+    line-height: 1.5;
+    font-size: 18px;
+  }
+}
+
+/* Extra Small Mobile (≤480px) */
+@media (max-width: 480px) {
+  .note,
+  .note.photo {
+    width: 86vw;
+    max-width: 260px;
+    aspect-ratio: auto;           /* allow taller notes if content needs it */
+  }
+
+  .note-body {
+    font-size: 12px;
+  }
+
+  .header {
+    font-size: 1rem;
+  }
+
+  .handle {
+    font-size: 14px;
+  }
+
+  .murder-board {
+    width: 98%;
+    margin-top: 110px;
+  }
+
+  .intro-text {
+    max-width: 300px;             /* even narrower column */
+    font-size: 16px;
+    line-height: 1.6;
+  }
 }
