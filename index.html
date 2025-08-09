@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel = "stylesheet" href = "stylesheet.css"/>
+
+</head>
+<body>
+    <div class = "wall" id = "wall">
+        <div class = 'handle' id = 'handle' onclick="toggleWall(event)">||</div>
+        
+        <div class = "wall-overlay" id = "wallOverlay"></div>\
+
+       
+        <img class = 'murder-board' src = "images/murder-board.png">
+        <div class = "notes-grid" id = "notesGrid">
+            <h1 class = "header">Kaleb Lee</h1>
+            <div class = "note" style = "left: 400px; top: 350px;">
+                <button class = "note-close" aria-label="Close">&times;</button>
+                <div class = "note-title">About</div>
+                <p class = "note-body">- graduated from California State University, Long Beach.
+                    <br> - Computer Science major with interests in Software Engineering/Development, UX/UI, Mobile and Web Applications and more!
+                    <br> - likes working out, video games, pop music, improv/musical theatre.
+                    
+                </p>
+            </div>
+
+            <div class="note photo" style = "left: 600px; top: 150px;">
+                <button class="note-close" aria-label="Close">&times;</button>
+                <img src="images/victim-kaleb.png" alt="Evidence photo">
+            </div>
+
+            <div class = "note" style = "right: 400px; top: 350px;">
+                <button class = "note-close" aria-label="Close">&times;</button>
+                <div class = "note-title">Projects</div>
+                <div class = "note-body" id = "projects-list"></div>
+            </div>
+
+            <div class = "note" style = "left: 400px; top: 550px;">
+                <button class = "note-close" aria-label="Close">&times;</button>
+                <div class = "note-title">Resume</div>
+                <div class = "note-body"></div>
+            </div>
+
+             <div class = "note" style = "left: 600px; top: 550px;">
+                <button class = "note-close" aria-label="Close">&times;</button>
+                <div class = "note-title">Contact</div>
+                <div class = "note-body">
+                    <form id = 'contact-form' class = 'contact-form' action = "https://formspree.io/f/xovlkyrj" method = "POST">
+                        <label>
+                            <span>Name:</span>
+                            <input type = 'text' name = 'name' required />
+                        </label>
+
+                        <label>
+                            <span>Email:</span>
+                            <input type = 'text' name = 'email' required />
+                        </label>
+
+                        <label>
+                            <span>Message:</span>
+                            <textarea name = "message" rows="5" required></textarea>
+                        </label>
+
+                        <button type = "submit">Submit</button>
+                    </form>
+                </div>
+            </div> 
+            
+             <div class = "note" style = "right: 375px; top: 550px;">
+                <button class = "note-close" aria-label="Close">&times;</button>
+                <div class = "note-title">His Known Links</div>
+                <div class = "note-body"></div>
+            </div>
+
+        </div>
+
+        
+
+        
+        
+    </div>
+
+    <div class = "intro-text" id = "typewriter"></div>
+
+    <script src = "script.js"></script>
+    <script src = "getProjects.js"></script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+body{
+    margin: 0;
+    background-image: url("images/mysterious-table.png");
+    overflow-x: hidden;
+}
+
+.wall{
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 120px;
+    background-color: #4B3621;
+    transition: width 1.2s ease-in-out;
+    z-index: 1000;
+    overflow: hidden;
+    box-shadow: 2px 0 5px  rgba(0,0,0,0.5);
+}
+
+.wall.expanded{
+    width: 1350px;
+}
+
+.handle{
+    width: 30px;
+    height: 60px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateX(150%);
+    
+   
+    background-color: #4B3621;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    writing-mode: vertical-rl;
+    font-size: 24px;
+    color: white;
+    z-index: 1001;
+}
+
+
+.wall-image{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 80%;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+
+    width: 15%;
+}
+
+.wall-image:hover{
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+.wall.expanded .notes-grid{
+    opacity: 1;
+    transition-delay: 1.2s;
+    pointer-events: auto;
+}
+
+
+.intro-text{
+    font-family: 'Courier New', Courier, monospace;
+    color: #f0f0f0;
+    font-size: 20px;
+    white-space: pre-wrap;
+    padding: 40px;
+    max-width: 800px;
+}
+
+.header {
+    font-family: 'Courier New', Courier, monospace;
+    position: absolute;
+    top: 80px; /* distance from the top */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto; /* shrink-wrap text */
+    text-decoration: underline;
+}
+
+.notes-grid{
+    opacity: 0;
+    position: absolute;
+    inset: 0;
+    padding: 40px 60px;
+    display: block;
+    overflow: hidden;
+    transition: opacity 10s ease;
+    pointer-events: none;
+}
+
+.note{
+    font-family: 'Courier New', Courier, monospace;
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: #fff38c;
+    color: #222;
+    padding: 14px;
+    box-shadow: 0 6px 12px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.4);
+    border-radius: 6px;
+    transform: scale(.9) rotate(var(--twist, -2deg));
+    transform-origin: center;
+    transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+    cursor: pointer;
+    filter: blur(.2px);
+    aspect-ratio: 1 / 1;
+}
+
+.note:nth-child(2n) { --twist: 1.5deg;}
+.note:nth-child(3n) { --twist: -3deg;}
+
+.note-title{
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.note-body{
+    font-size: 13px;
+    line-height: 1.25;
+    max-height: 5.2em;
+    overflow: hidden;
+}
+
+.note.zoomed{
+    position: absolute;
+    z-index:1003;
+    left: 50% !important;
+    top: 50% !important;
+    width: min(560px, 80vw);
+    max-height: min(70vh, 700px);
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    filter: none;
+    overflow: auto;
+    cursor: default;
+}
+
+.note.zoomed .note-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.note-close{
+    display: none;
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0,0,0,.55);
+    color: #fff;
+    font-size: 20px;
+    line-height: 32px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 1004;
+
+}
+
+.wall-overlay{
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 2s ease;
+    z-index: 1001;
+}
+
+
+/* force-hide during collapse to prevent flicker */
+.notes-grid.force-hide {
+  display: none !important;
+}
+
+/* small perf help */
+.note{ backface-visibility: hidden; }
+
+.note.photo{
+    padding: 0;
+    background: transparent;
+    aspect-ratio: auto;
+    transform: none;
+    filter: none;
+    box-shadow: none;
+    border: 0;
+    outline: 0;
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+.note.photo img{
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    border: 0;
+    outline: 0;
+}
+
+.note.photo:not(.zoomed) img{
+    filter: blur(.2px);
+}
+
+.note.photo.zoomed {
+    background: transparent;
+    padding: 0;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) rotate(0);
+    width: auto;
+    height: auto;
+    max-width: 90vw;
+    max-height: 80vh;
+    z-index: 1003;
+    filter: blur(0);
+}
+
+.note.photo.zoomed img {
+    filter: none;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.murder-board{
+    display: block;
+    width: 90%;
+    max-width: 825px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.note.zoomed .note-body{
+    flex: 1 1 auto;
+    overflow-y: auto;
+    max-height: none;
+    padding-right: 8px;
+}
+
+#projects-list{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.note .contact-form { display: none; }
+.note.zoomed .contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+/* Make the zoomed note scroll nicely and the body be the scroller */
+.note.zoomed { display: flex; flex-direction: column; -webkit-overflow-scrolling: touch; }
+.note.zoomed .note-body { flex: 1 1 auto; overflow-y: auto; max-height: none; padding-right: 8px; }
+
+/* Inputs styled to match the sticky-note vibe */
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  font: inherit;
+  padding: 8px 10px;
+  border: 1px solid rgba(0,0,0,.2);
+  border-radius: 6px;
+  background: #fffde0;
+  outline: none;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #b08b00;
+  box-shadow: 0 0 0 2px rgba(176,139,0,.15);
+}
+
+.contact-form button {
+  align-self: start;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 8px;
+  background: #3a3a3a;
+  color: #fff;
+  cursor: pointer;
+}
+
