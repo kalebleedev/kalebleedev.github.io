@@ -65,6 +65,12 @@ body{
     pointer-events: auto;
 }
 
+.wall.expanded .murder-board{
+    opacity: 1;
+    pointer-events: auto;
+    transition-delay: 1.2s;
+}
+
 
 .intro-text{
     font-family: 'Courier New', Courier, monospace;
@@ -78,7 +84,7 @@ body{
 .header {
     font-family: 'Courier New', Courier, monospace;
     position: absolute;
-    top: 80px; /* distance from the top */
+    top: 225px; /* distance from the top */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -238,11 +244,14 @@ body{
 }
 
 .murder-board{
+    opacity:0;
+    pointer-events: none;
+    transition: opacity 10s ease;
     display: block;
     width: 90%;
     max-width: 825px;
     height: auto;
-    margin: 0 auto;
+    margin: 150px auto 0 auto;
 }
 
 .note.zoomed .note-body{
@@ -250,6 +259,16 @@ body{
     overflow-y: auto;
     max-height: none;
     padding-right: 8px;
+}
+
+.note:not(.zoomed) .note-body{
+    opacity: 0;
+    pointer-events: none;
+}
+
+.note.zoomed .note-body{
+    filter: none;
+    pointer-events: auto;
 }
 
 #projects-list{
@@ -266,11 +285,11 @@ body{
 }
 
 
-/* Make the zoomed note scroll nicely and the body be the scroller */
+
 .note.zoomed { display: flex; flex-direction: column; -webkit-overflow-scrolling: touch; }
 .note.zoomed .note-body { flex: 1 1 auto; overflow-y: auto; max-height: none; padding-right: 8px; }
 
-/* Inputs styled to match the sticky-note vibe */
+
 .contact-form input,
 .contact-form textarea {
   width: 100%;
@@ -298,3 +317,25 @@ body{
   cursor: pointer;
 }
 
+.resume-embed .btn{
+    display: inline-block;
+    padding: 8px 14px;
+    margin-right: 10px;
+    background-color: #4B3621;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 20px;
+}
+
+.resume-embed .btn:hover{
+    background: #555;
+}
+
+.other{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}

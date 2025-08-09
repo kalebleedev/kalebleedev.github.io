@@ -11,13 +11,13 @@
     <div class = "wall" id = "wall">
         <div class = 'handle' id = 'handle' onclick="toggleWall(event)">||</div>
         
-        <div class = "wall-overlay" id = "wallOverlay"></div>\
+        <div class = "wall-overlay" id = "wallOverlay"></div>
 
        
         <img class = 'murder-board' src = "images/murder-board.png">
         <div class = "notes-grid" id = "notesGrid">
             <h1 class = "header">Kaleb Lee</h1>
-            <div class = "note" style = "left: 400px; top: 350px;">
+            <div class = "note" style = "left: 400px; top: 450px;">
                 <button class = "note-close" aria-label="Close">&times;</button>
                 <div class = "note-title">About</div>
                 <p class = "note-body">- graduated from California State University, Long Beach.
@@ -27,24 +27,31 @@
                 </p>
             </div>
 
-            <div class="note photo" style = "left: 600px; top: 150px;">
+            <div class="note photo" style = "left: 600px; top: 300px;">
                 <button class="note-close" aria-label="Close">&times;</button>
                 <img src="images/victim-kaleb.png" alt="Evidence photo">
             </div>
 
-            <div class = "note" style = "right: 400px; top: 350px;">
+            <div class = "note" style = "right: 400px; top: 450px;">
                 <button class = "note-close" aria-label="Close">&times;</button>
                 <div class = "note-title">Projects</div>
                 <div class = "note-body" id = "projects-list"></div>
             </div>
 
-            <div class = "note" style = "left: 400px; top: 550px;">
+            <div class = "note" style = "left: 400px; top: 650px;">
                 <button class = "note-close" aria-label="Close">&times;</button>
                 <div class = "note-title">Resume</div>
-                <div class = "note-body"></div>
+                <div class = "note-body">
+                    <div class = "resume-embed">
+                        <a href="Kaleb-Lee-Resume.pdf" download class ="btn">Download PDF</a>
+                        <a href="Kaleb-Lee-Resume.pdf" target="_blank" rel="noopener" class = "btn">Open in new tab</a>
+                    </div>
+                </div>
+
+
             </div>
 
-             <div class = "note" style = "left: 600px; top: 550px;">
+             <div class = "note" style = "left: 600px; top: 650px;">
                 <button class = "note-close" aria-label="Close">&times;</button>
                 <div class = "note-title">Contact</div>
                 <div class = "note-body">
@@ -65,16 +72,23 @@
                         </label>
 
                         <button type = "submit">Submit</button>
+                        <p>For other inquries, please email: kalebleedev@gmail.com.</p>
                     </form>
                 </div>
             </div> 
             
-             <div class = "note" style = "right: 375px; top: 550px;">
+             <div class = "note" style = "right: 375px; top: 650px;">
                 <button class = "note-close" aria-label="Close">&times;</button>
-                <div class = "note-title">His Known Links</div>
-                <div class = "note-body"></div>
-            </div>
-
+                <div class = "note-title">Other</div>
+                <div class = "note-body other">
+                    <a href="https://github.com/kalebleedev" target="_blank" rel="noopener">
+                        <img src = "images/github.png" style ="width: 75px; height: 75px;">
+                    </a>
+                    <a href="https://www.linkedin.com/in/kaleb-l-189222104/" target="_blank" rel="noopener">
+                        <img src = "images/linkedln.png" style = "width: 75px; height: 75px;">
+                    </a>
+                </div>
+             </div>
         </div>
 
         
