@@ -339,3 +339,5 @@ body{
     align-items: center;
     justify-content: center;
 }
+
+.wall:not(.expanded) .murder-board { display: none !important; }
