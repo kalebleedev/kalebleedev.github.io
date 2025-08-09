@@ -13,7 +13,7 @@ body{
     background-color: #4B3621;
     transition: width 1.2s ease-in-out;
     z-index: 1000;
-    overflow: hidden;
+    overflow: visible;
     box-shadow: 2px 0 5px  rgba(0,0,0,0.5);
 }
 
@@ -38,7 +38,7 @@ body{
     writing-mode: vertical-rl;
     font-size: 24px;
     color: white;
-    z-index: 1001;
+    z-index: 1100;
 }
 
 
@@ -348,15 +348,12 @@ body{
 
 /* Tablet (≤1024px) */
 @media (max-width: 1024px) {
-  /* Expanded wall fills viewport width */
-  .wall.expanded {
-    width: 100%;
-  }
+  .wall.expanded { width: 100%; }
 
-  /* Keep everything on the board, just a bit smaller */
+  /* Keep board layout, just scale a bit */
   .notes-grid {
     padding: 20px;
-    transform: scale(0.85);        /* proportional shrink, keeps absolute positions */
+    transform: scale(0.85);
     transform-origin: top center;
   }
 
@@ -386,29 +383,33 @@ body{
     max-width: 600px;
     line-height: 1.4;
   }
+
+  /* Handle stays reachable on tablet */
+  .handle {
+    width: 30px;
+    height: 64px;
+    font-size: 18px;
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
-/* Mobile (≤768px) — stay on board, scale the board further */
+/* Mobile (≤768px) — keep everything on board, scaled down */
 @media (max-width: 768px) {
   body {
     background-size: cover;
     background-position: center;
   }
 
-  .wall {
-    width: 80px;
-  }
-
-  .wall.expanded {
-    width: 100%;
-  }
+  .wall { width: 80px; }
+  .wall.expanded { width: 100%; }
 
   .handle {
-    width: 28px;
-    height: 56px;
+    width: 32px;            /* bigger tap target */
+    height: 72px;
     font-size: 18px;
-    /* keep the handle reachable on narrow screens */
-    transform: translateX(120%);
+    right: 100%;            /* stay outside wall edge */
+    transform: translateY(-50%);
+    -webkit-tap-highlight-color: transparent;
   }
 
   .header {
@@ -418,10 +419,10 @@ body{
     text-align: center;
   }
 
-  /* Scale the entire board contents so notes/photos remain in place */
+  /* Scale the entire board so absolute positions remain intact */
   .notes-grid {
     padding: 10px;
-    transform: scale(0.65);         /* proportional shrink */
+    transform: scale(0.65);
     transform-origin: top center;
     overflow: visible;
   }
@@ -444,7 +445,6 @@ body{
     object-fit: contain;
   }
 
-  /* Zoomed states get more room on small screens */
   .note.zoomed {
     width: 90%;
     max-height: 80vh;
@@ -484,7 +484,6 @@ body{
 
 /* Extra Small Mobile (≤480px) — smallest board scale */
 @media (max-width: 480px) {
-  /* Scale board further but keep layout intact */
   .notes-grid {
     transform: scale(0.5);
     transform-origin: top center;
@@ -496,16 +495,14 @@ body{
     font-size: 0.75em;
   }
 
-  .note-body {
-    font-size: 12px;
-  }
+  .note-body { font-size: 12px; }
 
-  .header {
-    font-size: 1rem;
-  }
+  .header { font-size: 1rem; }
 
   .handle {
-    font-size: 14px;
+    width: 36px;
+    height: 80px;
+    font-size: 16px;
   }
 
   .murder-board {
@@ -514,7 +511,7 @@ body{
   }
 
   .intro-text {
-    max-width: 300px;   /* even narrower column */
+    max-width: 300px;
     font-size: 16px;
     line-height: 1.6;
   }
